@@ -1,8 +1,14 @@
 import * as React from 'react';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import { SettingsIcon } from '../../../assets/images/customization/SettingsIcon';
+import { ColorSettings } from './ColorSettings';
 
-const AVAILABLE_COLORS = [
+export interface ThemeColorInterface {
+    key: string;
+    title: string;
+}
+
+const AVAILABLE_COLORS: ThemeColorInterface[] = [
     { key: '--main-background-color', title: 'page.body.customization.themes.color.mainBackgroundColor' },
     { key: '--body-background-color', title: 'page.body.customization.themes.color.bodyBackgroundColor' },
     { key: '--header-background-color', title: 'page.body.customization.themes.color.headerBackgroundColor' },
@@ -33,12 +39,25 @@ interface OwnProps {
 
 type Props = OwnProps;
 
-export class CustomizationThemes extends React.Component<Props> {
-    public renderColorsItem(item, index: number) {
+interface State {
+    colorSettingsItem: ThemeColorInterface;
+}
+
+const defaultColorSettingsItem = {
+    key: '',
+    title: '',
+};
+
+export class CustomizationThemes extends React.Component<Props, State> {
+    public state = {
+        colorSettingsItem: defaultColorSettingsItem,
+    };
+
+    public renderColorsItem(item: ThemeColorInterface, index: number) {
         const { translate } = this.props;
 
         return (
-            <div key={index} className="pg-customization-themes__colors__item">
+            <div key={index} className="pg-customization-themes__colors__item" onClick={e => this.handleSetColorSettingsItem(item)}>
                 <div className="pg-customization-themes__colors__item__content">
                     <span
                         className="pg-customization-themes__colors__item__content__circle"
@@ -64,10 +83,28 @@ export class CustomizationThemes extends React.Component<Props> {
     }
 
     public render() {
+        const { translate } = this.props;
+        const { colorSettingsItem } = this.state;
+
         return (
             <div className="pg-customization-themes">
                 {this.renderColors()}
+                <ColorSettings
+                    handleCloseColorSettings={this.handleSetColorSettingsItem}
+                    item={colorSettingsItem}
+                    translate={translate}
+                />
             </div>
         );
     }
+
+    private handleSetColorSettingsItem = (item?: ThemeColorInterface) => {
+        let newSettings: ThemeColorInterface = defaultColorSettingsItem;
+
+        if (item) {
+            newSettings = item;
+        }
+
+        this.setState({ colorSettingsItem: newSettings });
+    };
 }
