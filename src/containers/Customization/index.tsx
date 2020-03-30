@@ -1,7 +1,9 @@
+import classnames from 'classnames';
 import * as React from 'react';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { RouteProps, withRouter } from 'react-router-dom';
+import { PaletteIcon } from '../../assets/images/customization/PaletteIcon';
 import {
     CustomizationFonts,
     CustomizationImages,
@@ -35,7 +37,7 @@ interface State {
 class CustomizationContainer extends React.Component<Props, State> {
     public state = {
         currentTabIndex: 0,
-        isOpen: false,
+        isOpen: true,
     };
 
     public renderTabs = () => {
@@ -63,14 +65,21 @@ class CustomizationContainer extends React.Component<Props, State> {
 
     public render() {
         const { user, userLoggedIn } = this.props;
-        const { currentTabIndex } = this.state;
+        const { currentTabIndex, isOpen } = this.state;
 
         if (!userLoggedIn || user.role !== 'superadmin' || !this.handleCheckRoute()) {
             return null;
         }
 
+        const customizationClassName = classnames('pg-customization', {
+            'pg-customization--hidden': !isOpen,
+        });
+
         return (
-            <div className="pg-customization">
+            <div className={customizationClassName}>
+                <div className="pg-customization__toggler" onClick={e => this.handleToggleIsOpen()}>
+                    <PaletteIcon />
+                </div>
                 <TabPanel
                     panels={this.renderTabs()}
                     onTabChange={this.handleChangeTab}
@@ -92,6 +101,12 @@ class CustomizationContainer extends React.Component<Props, State> {
         }
 
         return false;
+    };
+
+    private handleToggleIsOpen = () => {
+        this.setState(prevState => ({
+            isOpen: !prevState.isOpen,
+        }));
     };
 
     private translate = (key: string) => this.props.intl.formatMessage({id: key});

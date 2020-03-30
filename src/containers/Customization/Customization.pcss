@@ -6,8 +6,31 @@
   position: fixed;
   right: 0;
   top: 0;
+  transition: 0.3s;
   width: 340px;
   z-index: 30000;
+
+  &--hidden {
+    margin-right: -340px;
+    transition: 0.3s;
+
+    .pg-customization__toggler {
+      svg {
+        path {
+          fill: red;
+        }
+      }
+
+      &:hover,
+      &:active {
+        svg {
+          path {
+            fill: var(--header-positive-text-color);
+          }
+        }
+      }
+    }
+  }
 
   .cr-tab-panel {
     width: 100%;
@@ -51,6 +74,35 @@
       font-size: 14px;
       font-weight: 600;
       line-height: 22px;
+    }
+  }
+
+  &__toggler {
+    align-items: center;
+    background: var(--cta-layer-color);
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    height: 60px;
+    justify-content: center;
+    margin-left: -96px;
+    position: absolute;
+    top: calc(100vh - 96px);
+    width: 60px;
+
+    svg {
+      path {
+        fill: var(--header-positive-text-color);
+      }
+    }
+
+    &:hover,
+    &:active {
+      svg {
+        path {
+          fill: red;
+        }
+      }
     }
   }
 }
