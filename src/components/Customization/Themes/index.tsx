@@ -1,5 +1,30 @@
 import * as React from 'react';
 
+const AVAILABLE_COLORS = [
+    { key: '--main-background-color', title: 'page.body.customization.themes.color.mainBackgroundColor' },
+    { key: '--body-background-color', title: 'page.body.customization.themes.color.bodyBackgroundColor' },
+    { key: '--header-background-color', title: 'page.body.customization.themes.color.headerBackgroundColor' },
+    { key: '--subheader-background-color', title: 'page.body.customization.themes.color.subheaderBackgroundColor' },
+    { key: '--dropdown-background-color', title: 'page.body.customization.themes.color.dropdownBackgroundColor' },
+    { key: '--icons', title: 'page.body.customization.themes.color.icon' },
+    { key: '--primary-cta-color', title: 'page.body.customization.themes.color.primaryCtaColor' },
+    { key: '--contrast-cta-color', title: 'page.body.customization.themes.color.contrastCtaColor' },
+    { key: '--secondary-contrast-cta-color', title: 'page.body.customization.themes.color.secondaryContrastCtaColor' },
+    { key: '--cta-layer-color', title: 'page.body.customization.themes.color.ctaLayerColor' },
+    { key: '--system-green', title: 'page.body.customization.themes.color.systemGreen' },
+    { key: '--system-red', title: 'page.body.customization.themes.color.systemRed' },
+    { key: '--system-yellow', title: 'page.body.customization.themes.color.systemYellow' },
+    { key: '--asks', title: 'page.body.customization.themes.color.asks' },
+    { key: '--bids', title: 'page.body.customization.themes.color.bids' },
+    { key: '--primary-text-color', title: 'page.body.customization.themes.color.primaryTextColor' },
+    { key: '--text-contrast-color', title: 'page.body.customization.themes.color.textContrastColor' },
+    { key: '--input-background-color', title: 'page.body.customization.themes.color.inputBackgroundColor' },
+    { key: '--divider-color', title: 'page.body.customization.themes.color.dividerColor' },
+    { key: '--shadow-color', title: 'page.body.customization.themes.color.shadowColor' },
+    { key: '--landing-background-color', title: 'page.body.customization.themes.color.landingBackgroundColor' },
+    { key: '--strength-meter-very-strong', title: 'page.body.customization.themes.color.strengthMeterVeryStrong' },
+];
+
 interface OwnProps {
     translate: (key: string) => string;
 }
@@ -7,14 +32,32 @@ interface OwnProps {
 type Props = OwnProps;
 
 export class CustomizationThemes extends React.Component<Props> {
-    public render() {
+    public renderColorsItem(item, index: number) {
         const { translate } = this.props;
 
         return (
+            <div key={index} className="pg-customization-themes__colors__item">
+                <span
+                    className="pg-customization-themes__colors__item__circle"
+                    style={{backgroundColor: `var(${item.key})`}}
+                />
+                <span className="pg-customization-themes__colors__item__title">{translate(item.title)}</span>
+            </div>
+        );
+    }
+
+    public renderColors() {
+        return (
+            <div className="pg-customization-themes__colors">
+                {AVAILABLE_COLORS.map((item, index) => this.renderColorsItem(item, index))}
+            </div>
+        );
+    }
+
+    public render() {
+        return (
             <div className="pg-customization-themes">
-                <span className="pg-customization-themes__coming-soon">
-                    {translate('page.body.customization.comingSoon')}
-                </span>
+                {this.renderColors()}
             </div>
         );
     }
