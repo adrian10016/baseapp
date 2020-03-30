@@ -21,6 +21,7 @@
       svg {
         path {
           fill: var(--customization-text-contrast-color);
+          opacity: 0.72;
         }
       }
 
@@ -29,6 +30,7 @@
         svg {
           path {
             fill: var(--customization-cta-color);
+            opacity: 1;
           }
         }
       }
@@ -89,7 +91,7 @@
     flex-direction: row;
     height: 100%;
     justify-content: center;
-    padding: 24px;
+    padding: 24px 0;
     width: 100%;
 
     &__colors {
@@ -126,12 +128,26 @@
       justify-content: center;
       letter-spacing: 0.3px;
       line-height: 22px;
+      transition: 0.2s;
       user-select: none;
       width: 100%;
       width: calc(50% - 11px);
 
       &:first-child {
-        background: var(--customization-cta-secondary-color);
+        background: var(--customization-background-color);
+        box-shadow: 0 0 0 1px var(--customization-text-contrast-color);
+        color: var(--customization-text-contrast-color);
+        font-weight: 400;
+        opacity: 0.72;
+
+        &:hover,
+        &:active {
+          background: var(--customization-cta-secondary-color);
+          box-shadow: none;
+          color: var(--customization-background-color);
+          font-weight: bold;
+          opacity: 1;
+        }
       }
     }
   }
@@ -152,6 +168,7 @@
     svg {
       path {
         fill: var(--customization-cta-color);
+        opacity: 1;
       }
     }
 
@@ -160,6 +177,7 @@
       svg {
         path {
           fill: var(--customization-text-contrast-color);
+          opacity: 0.72;
         }
       }
     }

@@ -1,5 +1,6 @@
 import * as React from 'react';
 import PerfectScrollbar from 'react-perfect-scrollbar';
+import { SettingsIcon } from '../../../assets/images/customization/SettingsIcon';
 
 const AVAILABLE_COLORS = [
     { key: '--main-background-color', title: 'page.body.customization.themes.color.mainBackgroundColor' },
@@ -38,11 +39,16 @@ export class CustomizationThemes extends React.Component<Props> {
 
         return (
             <div key={index} className="pg-customization-themes__colors__item">
-                <span
-                    className="pg-customization-themes__colors__item__circle"
-                    style={{backgroundColor: `var(${item.key})`}}
-                />
-                <span className="pg-customization-themes__colors__item__title">{translate(item.title)}</span>
+                <div className="pg-customization-themes__colors__item__content">
+                    <span
+                        className="pg-customization-themes__colors__item__content__circle"
+                        style={{backgroundColor: `var(${item.key})`}}
+                    />
+                    <span className="pg-customization-themes__colors__item__content__title">{translate(item.title)}</span>
+                </div>
+                <div className="pg-customization-themes__colors__item__settings-icon">
+                    <SettingsIcon />
+                </div>
             </div>
         );
     }
