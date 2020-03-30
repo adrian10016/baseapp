@@ -1,4 +1,5 @@
 import * as React from 'react';
+import PerfectScrollbar from 'react-perfect-scrollbar';
 
 const AVAILABLE_COLORS = [
     { key: '--main-background-color', title: 'page.body.customization.themes.color.mainBackgroundColor' },
@@ -49,7 +50,9 @@ export class CustomizationThemes extends React.Component<Props> {
     public renderColors() {
         return (
             <div className="pg-customization-themes__colors">
-                {AVAILABLE_COLORS.map((item, index) => this.renderColorsItem(item, index))}
+                <PerfectScrollbar>
+                    {AVAILABLE_COLORS.map((item, index) => this.renderColorsItem(item, index))}
+                </PerfectScrollbar>
             </div>
         );
     }
