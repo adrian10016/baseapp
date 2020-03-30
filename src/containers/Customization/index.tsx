@@ -65,7 +65,7 @@ class CustomizationContainer extends React.Component<Props, State> {
         const { user, userLoggedIn } = this.props;
         const { currentTabIndex } = this.state;
 
-        if (!userLoggedIn || user.role !== 'superadmin') {
+        if (!userLoggedIn || user.role !== 'superadmin' || !this.handleCheckRoute()) {
             return null;
         }
 
@@ -84,6 +84,14 @@ class CustomizationContainer extends React.Component<Props, State> {
         this.setState({
             currentTabIndex: index,
         });
+    };
+
+    private handleCheckRoute = () => {
+        if (window.location.hash && window.location.hash.substring(1) === 'settings') {
+            return true;
+        }
+
+        return false;
     };
 
     private translate = (key: string) => this.props.intl.formatMessage({id: key});
