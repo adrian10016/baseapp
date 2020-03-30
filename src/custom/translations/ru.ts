@@ -488,6 +488,15 @@ export const ru: LangType = {
     'page.modal.expired.title': 'Ваша сессия истекла',
     'page.modal.expired.submit': 'Обновить сессию',
 
+
+    /* Customization */
+    'page.body.customization.tabs.themes': 'Colors',
+    'page.body.customization.tabs.fonts': 'Fonts',
+    'page.body.customization.tabs.spacing': 'Spacing',
+    'page.body.customization.tabs.images': 'Images',
+    'page.body.customization.comingSoon': 'Coming Soon',
+
+
     // success messages
     'success.documents.accepted': 'Ваши документы успешно приняты',
     'success.identity.accepted': 'Данные профиля успешно приняты',

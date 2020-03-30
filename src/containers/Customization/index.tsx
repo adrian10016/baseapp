@@ -1,6 +1,14 @@
 import * as React from 'react';
+import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { RouteProps, withRouter } from 'react-router-dom';
+import {
+    CustomizationFonts,
+    CustomizationImages,
+    CustomizationSpacing,
+    CustomizationThemes,
+    TabPanel,
+} from '../../components';
 import {
     RootState,
     selectUserInfo,
@@ -17,19 +25,45 @@ interface HistoryProps {
     history: History;
 }
 
-type Props = ReduxProps & HistoryProps & RouteProps;
+type Props = ReduxProps & HistoryProps & RouteProps & InjectedIntlProps;
 
 interface State {
+    currentTabIndex: number;
     isOpen: boolean;
 }
 
 class CustomizationContainer extends React.Component<Props, State> {
     public state = {
+        currentTabIndex: 0,
         isOpen: false,
+    };
+
+    public renderTabs = () => {
+        const { currentTabIndex } = this.state;
+
+        return [
+            {
+                content: currentTabIndex === 0 ? <CustomizationThemes translate={this.translate} /> : null,
+                label: this.translate('page.body.customization.tabs.themes'),
+            },
+            {
+                content: currentTabIndex === 1 ? <CustomizationFonts translate={this.translate} /> : null,
+                label: this.translate('page.body.customization.tabs.fonts'),
+            },
+            {
+                content: currentTabIndex === 2 ? <CustomizationSpacing translate={this.translate} /> : null,
+                label: this.translate('page.body.customization.tabs.spacing'),
+            },
+            {
+                content: currentTabIndex === 3 ? <CustomizationImages translate={this.translate} /> : null,
+                label: this.translate('page.body.customization.tabs.images'),
+            },
+        ];
     };
 
     public render() {
         const { user, userLoggedIn } = this.props;
+        const { currentTabIndex } = this.state;
 
         if (!userLoggedIn || user.role !== 'superadmin') {
             return null;
@@ -37,10 +71,22 @@ class CustomizationContainer extends React.Component<Props, State> {
 
         return (
             <div className="pg-customization">
-                Customization settings
+                <TabPanel
+                    panels={this.renderTabs()}
+                    onTabChange={this.handleChangeTab}
+                    currentTabIndex={currentTabIndex}
+                />
             </div>
         );
     }
+
+    private handleChangeTab = (index: number) => {
+        this.setState({
+            currentTabIndex: index,
+        });
+    };
+
+    private translate = (key: string) => this.props.intl.formatMessage({id: key});
 }
 
 const mapStateToProps = (state: RootState): ReduxProps => ({
@@ -49,4 +95,4 @@ const mapStateToProps = (state: RootState): ReduxProps => ({
 });
 
 // tslint:disable no-any
-export const Customization = withRouter(connect(mapStateToProps)(CustomizationContainer) as any) as any;
+export const Customization = injectIntl(withRouter(connect(mapStateToProps)(CustomizationContainer) as any) as any);

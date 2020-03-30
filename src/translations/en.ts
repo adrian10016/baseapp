@@ -486,6 +486,15 @@ export const en = {
     'page.modal.expired.title': 'Your session has expired',
     'page.modal.expired.submit': 'Log in again',
 
+
+    /* Customization */
+    'page.body.customization.tabs.themes': 'Colors',
+    'page.body.customization.tabs.fonts': 'Fonts',
+    'page.body.customization.tabs.spacing': 'Spacing',
+    'page.body.customization.tabs.images': 'Images',
+    'page.body.customization.comingSoon': 'Coming Soon',
+
+
     // success messages
     'success.documents.accepted': 'Documents upload was successful',
     'success.identity.accepted': 'Identity upload was successful',
