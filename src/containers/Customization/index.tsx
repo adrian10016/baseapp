@@ -63,6 +63,19 @@ class CustomizationContainer extends React.Component<Props, State> {
         ];
     };
 
+    public renderActionButtons() {
+        return (
+            <div className="pg-customization__action-buttons">
+                <span className="pg-customization__action-buttons__button">
+                    {this.translate('page.body.customization.actionButtons.reset')}
+                </span>
+                <span className="pg-customization__action-buttons__button">
+                    {this.translate('page.body.customization.actionButtons.save')}
+                </span>
+            </div>
+        );
+    }
+
     public render() {
         const { user, userLoggedIn } = this.props;
         const { currentTabIndex, isOpen } = this.state;
@@ -85,6 +98,7 @@ class CustomizationContainer extends React.Component<Props, State> {
                     onTabChange={this.handleChangeTab}
                     currentTabIndex={currentTabIndex}
                 />
+                {this.renderActionButtons()}
             </div>
         );
     }

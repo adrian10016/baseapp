@@ -493,6 +493,8 @@ export const en = {
     'page.body.customization.tabs.spacing': 'Spacing',
     'page.body.customization.tabs.images': 'Images',
     'page.body.customization.comingSoon': 'Coming Soon',
+    'page.body.customization.actionButtons.reset': 'Reset',
+    'page.body.customization.actionButtons.save': 'Save',
 
     'page.body.customization.themes.color.mainBackgroundColor': 'Main background',
     'page.body.customization.themes.color.bodyBackgroundColor': 'Body background',

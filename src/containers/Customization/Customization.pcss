@@ -3,7 +3,9 @@
   box-shadow: var(--customization-shadow);
   color: var(--customization-primary-text-color);
   display: flex;
+  flex-direction: column;
   height: 100vh;
+  justify-content: space-between;
   position: fixed;
   right: 0;
   top: 0;
@@ -90,11 +92,47 @@
     padding: 24px;
     width: 100%;
 
+    &__colors {
+      max-height: calc(100vh - 48px - 72px - 48px); /* (own height) - (tabs panel height) - (action buttons height) */
+    }
+
     &__coming-soon {
       color: var(--customization-text-contrast-color);
       font-size: 14px;
       font-weight: 600;
       line-height: 22px;
+    }
+  }
+
+  &__action-buttons {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 24px;
+    padding-top: 14px;
+    width: 100%;
+
+    &__button {
+      align-items: center;
+      background: var(--customization-cta-color);
+      border-radius: 4px;
+      color: var(--customization-background-color);
+      cursor: pointer;
+      display: flex;
+      font-size: 12px;
+      font-weight: bold;
+      height: 34px;
+      justify-content: center;
+      letter-spacing: 0.3px;
+      line-height: 22px;
+      user-select: none;
+      width: 100%;
+      width: calc(50% - 11px);
+
+      &:first-child {
+        background: var(--customization-cta-secondary-color);
+      }
     }
   }
 
