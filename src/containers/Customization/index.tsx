@@ -77,10 +77,16 @@ class CustomizationContainer extends React.Component<Props, State> {
     }
 
     public render() {
-        const { user, userLoggedIn } = this.props;
+        const { userLoggedIn } = this.props;
         const { currentTabIndex, isOpen } = this.state;
 
+        /*
         if (!userLoggedIn || user.role !== 'superadmin' || !this.handleCheckRoute()) {
+            return null;
+        }
+        */
+
+        if (!userLoggedIn || !this.handleCheckRoute()) {
             return null;
         }
 
